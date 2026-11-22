@@ -14,7 +14,7 @@ from pathlib import Path
 SITE_URL = "https://seongkwon-ham.github.io"
 UPDATED = "November 2026"           # shown in the footer of every page
 EMAIL = "skham.econ@yonsei.ac.kr"
-GOOGLE_VERIFICATION = ""            # Google Search Console > HTML tag > content="..." value
+GOOGLE_VERIFICATION = "K9H4NTLD0AC9T67dCbMoKKtk3IVvNjVkBCpD4-4_uDE"   # Google Search Console > HTML tag (keep it)
 NAVER_VERIFICATION = ""             # Naver Search Advisor > HTML tag > content="..." value
 # ────────────────────────────────────────────────────────────────────────
 
