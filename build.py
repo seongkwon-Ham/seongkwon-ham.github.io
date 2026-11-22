@@ -15,7 +15,7 @@ SITE_URL = "https://seongkwon-ham.github.io"
 UPDATED = "November 2026"           # shown in the footer of every page
 EMAIL = "skham.econ@yonsei.ac.kr"
 GOOGLE_VERIFICATION = "K9H4NTLD0AC9T67dCbMoKKtk3IVvNjVkBCpD4-4_uDE"   # Google Search Console > HTML tag (keep it)
-NAVER_VERIFICATION = ""             # Naver Search Advisor > HTML tag > content="..." value
+NAVER_VERIFICATION = "034875e87df9ba7c2c1ced58bf6424174cdc39b8"       # Naver Search Advisor > HTML tag (keep it)
 # ────────────────────────────────────────────────────────────────────────
 
 ROOT = Path(__file__).resolve().parent
