@@ -1,1 +1,3 @@
 __pycache__/
+# docs/ is built by GitHub Actions on every push; the local copy is only for preview.
+docs/

@@ -1,0 +1,109 @@
+# CV page. Editable at /admin > CV.
+# A section with papers: true is filled with the working papers from research.yml.
+# Text fields accept *italic*, **bold**, and [link text](https://...).
+title: Curriculum vitae
+sections:
+  - heading: Education
+    items:
+      - years: 2024 – present
+        title: M.A. in Economics
+        detail: Yonsei University, Seoul
+      - years: 2019 – 2024
+        title: B.A. in Economics
+        detail: Yonsei University, Seoul · *High Honors*, second-highest graduation honor
+      - years: 2019 – 2021
+        title: Military service
+        detail: Republic of Korea Army (leave of absence)
+
+  - heading: Fields of interest
+    items:
+      - years: Fields
+        title: Macroeconomics, Energy Economics, Finance, Environmental Economics
+
+  - heading: Working papers
+    papers: true
+
+  - heading: Presentations
+    items:
+      - years: "2026"
+        title: 18th Joint Economics Symposium of Six Leading East Asian Universities
+        detail: Seoul, Korea
+      - years: "2025"
+        title: BK21 Workshop on Climate Change, Economics, and Policy Response
+        detail: Yonsei University
+
+  - heading: Research experience
+    items:
+      - years: 2026 – present
+        title: Research Assistant, Korea Economic Research Institute
+        bullets:
+          - Supports the production of economic outlook publications
+          - Plans policy seminars, including one held at the National Assembly
+      - years: Jan – Jun 2026
+        title: Research Assistant to Prof. Ki Young Park and Prof. Soh Young In
+        detail: "*Is Being Green Rewarded in the Market?* (Yonsei University and KAIST)"
+        bullets:
+          - Joined the project as a coauthor in July 2026
+          - Built the Trucost, CRSP/Compustat, and MSCI data and extended the sample
+          - Replicated Aswani, Raghunandan, and Rajgopal (2024) and Pástor, Stambaugh, and Taylor (2022) to validate the data and code
+      - years: May – Jun 2024
+        title: Research Assistant to Prof. Eunseong Ma, Yonsei University
+        detail: "*Inflation-Linked Debt and Macroeconomic Volatility in 21 OECD Countries* · R.K. Cho Research Cluster"
+
+  - heading: Teaching assistant, Yonsei University
+    items:
+      - years: Fall 2025 – present
+        title: Information and Game Theory
+        detail: Prof. Youngse Kim
+      - years: Fall 2025
+        title: AI & Financial Engineering
+        detail: Prof. Joocheol Kim
+      - years: Spring 2025 – Spring 2026
+        title: Public Finance
+        detail: Prof. Kyung-woo Lee · three semesters
+      - years: Spring 2025
+        title: Quantitative Analysis for Macroeconomics
+        detail: Prof. Sunbin Kim
+      - years: Fall 2023
+        title: Peer Tutor, Macroeconomics
+        detail: Yonsei Eagles Tutoring Program
+
+  - heading: Honors, grants, and scholarships
+    items:
+      - years: 2024 – 2026
+        title: Brain Korea 21 Program
+        detail: National Research Foundation of Korea
+      - years: 2024 – 2026
+        title: Integrated M.A. Program Scholarship
+        detail: Yonsei University
+      - years: "2024"
+        title: Graduated with High Honors
+        detail: Second-highest graduation honor, Yonsei University
+      - years: 2019, 2023
+        title: Honors
+        detail: Top 10 percent of the semester, Yonsei University
+      - years: 2023 – 2024
+        title: Other scholarships
+        detail: Academic Track Scholarship (2024) · Lee Doo-won Scholarship (2023, 2024) · Hyechun Scholarship (2023) · Tutoring Scholarship (2023)
+
+  - heading: Academic activities
+    items:
+      - years: 2024 – present
+        title: Reading groups, Yonsei University
+        detail: Macro-Environment-International · Applied Microeconomics
+      - years: 2022 – 2025
+        title: Junior Scholars Club, Economics Chapter
+        detail: Yonsei University · President, 2023
+
+tools:
+  - MATLAB
+  - Python
+  - Stata
+  - R
+  - Julia
+  - LaTeX
+methods:
+  - Local projections
+  - PPML
+  - Event study
+  - Factor models

@@ -118,7 +118,7 @@ p{margin:0}
 .eyebrow .dot{color:var(--accent-dim)}
 h1{
   margin:0;font-family:'Archivo','Helvetica Neue',Arial,sans-serif;
-  font-size:clamp(3.2rem,11vw,8.6rem);font-weight:600;font-stretch:112%;
+  font-size:clamp(3.2rem,9vw,8.6rem);font-weight:600;font-stretch:112%;
   line-height:.86;letter-spacing:-.035em;
 }
 h1 span{display:block}
@@ -245,6 +245,8 @@ footer{border-top:1px solid var(--rule);padding:26px 0 34px;color:var(--ink-3)}
    RESPONSIVE
    ============================================================ */
 @media (max-width:1000px){
+  .hero-grid{grid-template-columns:minmax(0,1fr)}
+  .portrait{max-width:170px}
   .paper{grid-template-columns:minmax(0,1fr)}
   .pfig canvas{height:clamp(210px,46vw,280px)}
 }

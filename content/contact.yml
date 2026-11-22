@@ -1,0 +1,11 @@
+# Contact page. Editable at /admin > Contact. The email itself is in site.yml.
+title: Get in touch
+lede: For drafts of the working papers or anything else, email is the fastest way to reach me.
+boxes:
+  - label: Office
+    text: |
+      School of Economics, Yonsei University
+      50 Yonsei-ro, Seodaemun-gu
+      Seoul 03722, Republic of Korea
+  - label: Drafts
+    text: Working paper drafts are shared on request. See [Research](/research/) for abstracts and figures.

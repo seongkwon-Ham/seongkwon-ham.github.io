@@ -1,12 +1,14 @@
 @echo off
-rem Double-click to rebuild the site and upload it to GitHub.
-rem Edit content\ or static\ first. The live site updates 1-2 minutes after this finishes.
+rem Double-click to check the site builds, then upload your changes to GitHub.
+rem GitHub rebuilds and publishes the site 1-2 minutes after the upload.
+rem (Edits made in the web editor at /admin do not need this file.)
 cd /d "%~dp0"
-echo [1/3] Building the site into docs\ ...
+echo [1/3] Checking that the site builds ...
 python build.py
 if errorlevel 1 goto failed
 echo.
 echo [2/3] Saving a version (commit) ...
+git pull --rebase --autostash
 git add -A
 git commit -m "Update site"
 echo.

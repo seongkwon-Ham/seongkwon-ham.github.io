@@ -1,0 +1,87 @@
+# Research page. Editable at /admin > Research.
+# Each paper also appears in the Home list and in the CV automatically.
+# figure: one of carbon-costs, being-green, environmental-bias, or none.
+title: Working papers
+lede: Carbon pricing, trade policy, and climate finance. Drafts are available on request.
+papers:
+  - id: carbon-costs
+    title: Tracing Carbon Costs
+    subtitle: Macroeconomic Impacts of Korean ETS Policy Through the Power Sector
+    coauthors: with Soojin Jo and Myungkyu Shim
+    status: Working paper
+    date: Nov 2026
+    abstract: >-
+      Carbon prices in Korea do not reach the price of electricity yet, as most allowances are free and
+      the retail price is a policy decision. This paper traces the response of the economy to a 10 percent
+      increase in the cost of carbon-emitting generation under a full pass-through scenario. On average,
+      production falls and unemployment rises, but both responses are small. The response of production
+      depends on the spare capacity of nuclear generation. When nuclear utilization is high, production is
+      0.36 percentage points lower after 7 months. When it is low, generation shifts more toward carbon-free
+      sources and the response of production is insignificant. Across manufacturing industries, production
+      in the high electricity-intensity group is significantly lower than in the low group for ten months. The
+      results are similar with quarterly GDP and consumption, an alternative measure of nuclear capacity,
+      and other groupings of industries. The cost of carbon pricing will therefore depend on how much
+      nuclear capacity is spare, and it will fall first on electricity-intensive industries.
+    jel: E32, Q41, Q43, Q48, Q54
+    figure: carbon-costs
+    figure_title: All-industry production
+    figure_range: 0–18 months
+    figure_note: >-
+      Cumulative change in pp after a 10% higher cost of carbon-emitting generation, at the first quartile,
+      median, and third quartile of lagged nuclear utilization. Local projections, 2009M07–2025M12.
+      ● significant at 95%, × not significant.
+
+  - id: being-green
+    title: Is “Being Green” Rewarded in the Market?
+    subtitle: An Empirical Investigation of Decarbonization and Stock Returns
+    coauthors: with Soh Young In, Ki Young Park, and Ashby Monk
+    status: Working paper
+    date: Nov 2026
+    abstract: >-
+      We ask whether carbon-efficient firms earn higher stock returns than carbon-inefficient firms in the
+      same industry, and what the difference reflects. A portfolio that buys the firms with the lowest scope 1
+      emission intensity in each sector and sells those with the highest earns an alpha of more than 0.4 percent
+      per month from July 2009 to December 2024. The CAPM and the Fama-French three, four and five-factor models
+      do not explain it. The alpha moves with earnings news. Carbon-efficient firms report higher standardized
+      unexpected earnings (SUE) than carbon-inefficient firms, and when this gap enters the factor models the
+      alpha falls by close to half. About four fifths of this fall comes from the nine trading days around
+      earnings announcements. The gap in SUE comes mainly from its denominator. The earnings of carbon-efficient
+      firms are less volatile, so the same change in EPS is larger news for them. Carbon efficiency is thus
+      rewarded in the market even among firms in the same industry, and a large part of the reward arrives with
+      news about earnings that rise more steadily. Why carbon efficiency goes with steady earnings remains open,
+      but it helps to identify firms with stable and growing earnings ahead of their announcements.
+    jel: G12, G14, M41, Q54
+    figure: being-green
+    figure_title: Efficient minus inefficient
+    figure_range: 2009–2024
+    figure_note: >-
+      Cumulative return (%) of the portfolio long the lowest and short the highest scope 1 emission intensity
+      within each sector, monthly, 2009M07–2024M12.
+
+  - id: environmental-bias
+    title: Does Removing the Environmental Bias Reduce Carbon?
+    subtitle: Evidence from Korea–China Steel Trade
+    coauthors: with Jaerim Choi
+    status: Working paper
+    date: Nov 2026
+    abstract: >-
+      In most countries tariffs are lower on dirty goods than on clean goods, and models suggest that
+      removing this environmental bias of trade policy would lower global emissions. However, a free trade
+      agreement can only cut tariffs. Korea’s tariffs on most dirty upstream steel products were already
+      zero before the Korea–China Free Trade Agreement, so its cuts fall almost only on clean downstream
+      products. The agreement is thus a well-suited setting to study how the carbon embodied in trade
+      responds when downstream tariffs are cut. The tariff cuts reduce the environmental bias in the tariffs
+      of both countries as they are phased in. With a Poisson pseudo-maximum-likelihood regression on
+      monthly trade by product, we find that the carbon embodied in Korea’s imports of the liberalized
+      products rises by 40 percent relative to products whose tariff did not change. The estimate for
+      exports is also positive but it is insignificant. The results hold in four robustness checks. On the
+      products that both countries liberalized, we find suggestive evidence that embodied carbon moved
+      on net into Korea, the cleaner producer of the two. These results imply that removing the bias by
+      cutting downstream tariffs can raise the carbon embodied in trade.
+    jel: F13, F14, F18, Q54, Q56
+    figure: environmental-bias
+    figure_title: Carbon embodied in Korea’s imports
+    figure_range: Monthly
+    figure_note: >-
+      PPML estimate for each month, in log points relative to products whose tariff did not change.
+      Base month 2015M12. SE clustered by product.

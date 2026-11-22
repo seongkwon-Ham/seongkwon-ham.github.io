@@ -1,0 +1,158 @@
+# Settings for the site editor at /admin (Sveltia CMS, Decap-compatible format).
+# Each "file" below is one data file in content/. Saving in the editor commits to GitHub,
+# and .github/workflows/site.yml then rebuilds the site (about 1-2 minutes).
+backend:
+  name: github
+  repo: seongkwon-Ham/seongkwon-ham.github.io
+  branch: main
+  commit_messages:
+    update: "Edit {{slug}} in the site editor"
+    uploadMedia: "Upload {{path}} in the site editor"
+
+site_url: https://seongkwon-ham.github.io
+display_url: https://seongkwon-ham.github.io
+media_folder: static
+public_folder: /assets
+
+collections:
+  - name: pages
+    label: 페이지
+    editor: { preview: false }
+    files:
+      # ── Home ───────────────────────────────────────────────
+      - name: home
+        label: Home
+        file: content/home.yml
+        fields:
+          - label: 이름 위 작은 글씨
+            name: eyebrow
+            widget: list
+            field: { label: 항목, name: item, widget: string }
+          - label: 한 줄 소개 (이름 아래)
+            name: tagline
+            widget: text
+            hint: "*기울임* 으로 감싸면 파란 기울임 글씨가 됩니다."
+          - label: 사진 (세로 4:5 권장, 비우면 SH 이니셜)
+            name: photo
+            widget: image
+            required: false
+          - label: 인사말
+            name: greeting
+            widget: text
+            hint: 빈 줄을 하나 넣으면 문단이 나뉩니다. *기울임*, **굵게**, [링크 글씨](https://주소) 를 쓸 수 있습니다.
+          - label: 오른쪽 정보 상자
+            name: facts
+            widget: list
+            label_singular: 정보
+            summary: "{{fields.label}} · {{fields.title}}"
+            fields:
+              - { label: 왼쪽 라벨, name: label, widget: string }
+              - { label: 큰 글씨, name: title, widget: string }
+              - { label: 작은 글씨 (줄바꿈 가능), name: detail, widget: text, required: false }
+
+      # ── Research ───────────────────────────────────────────
+      - name: research
+        label: Research
+        file: content/research.yml
+        fields:
+          - { label: 페이지 제목, name: title, widget: string }
+          - { label: 제목 아래 설명, name: lede, widget: text }
+          - label: 논문 (Home 목록과 CV 에도 자동으로 들어감)
+            name: papers
+            widget: list
+            label_singular: 논문
+            summary: "{{fields.title}}"
+            fields:
+              - label: 주소용 이름 (영문 소문자와 - 만)
+                name: id
+                widget: string
+                hint: "예: carbon-costs. 주소가 /research/#carbon-costs 가 됩니다. 정한 뒤에는 바꾸지 마세요."
+                pattern: ["^[a-z0-9-]+$", "영문 소문자, 숫자, - 만 쓸 수 있습니다"]
+              - { label: 제목, name: title, widget: string }
+              - { label: 부제 (선택), name: subtitle, widget: string, required: false }
+              - { label: 공저자, name: coauthors, widget: string, hint: "예: with Jaerim Choi" }
+              - { label: 상태 꼬리표, name: status, widget: string, default: Working paper }
+              - { label: 날짜 꼬리표, name: date, widget: string, required: false, hint: "예: Nov 2026" }
+              - { label: 초록, name: abstract, widget: text, required: false }
+              - { label: JEL 코드, name: jel, widget: string, required: false }
+              - label: 그림
+                name: figure
+                widget: select
+                default: none
+                options:
+                  - { label: 그림 없음, value: none }
+                  - { label: "Tracing Carbon Costs 그림 (생산 반응)", value: carbon-costs }
+                  - { label: "Being Green 그림 (누적 수익률)", value: being-green }
+                  - { label: "Environmental Bias 그림 (월별 추정치)", value: environmental-bias }
+              - { label: 그림 제목, name: figure_title, widget: string, required: false }
+              - { label: 그림 기간 표시, name: figure_range, widget: string, required: false }
+              - { label: 그림 설명, name: figure_note, widget: text, required: false }
+
+      # ── CV ─────────────────────────────────────────────────
+      - name: cv
+        label: CV
+        file: content/cv.yml
+        fields:
+          - { label: 페이지 제목, name: title, widget: string }
+          - label: 항목 묶음
+            name: sections
+            widget: list
+            label_singular: 묶음
+            summary: "{{fields.heading}}"
+            fields:
+              - { label: 묶음 제목, name: heading, widget: string }
+              - label: 논문 목록을 자동으로 채우기
+                name: papers
+                widget: boolean
+                default: false
+                required: false
+                hint: 켜면 아래 항목 대신 Research 의 논문들이 들어갑니다.
+              - label: 항목
+                name: items
+                widget: list
+                required: false
+                label_singular: 항목
+                summary: "{{fields.years}} · {{fields.title}}"
+                fields:
+                  - { label: 왼쪽 (연도), name: years, widget: string }
+                  - { label: 제목, name: title, widget: string }
+                  - { label: 설명 (선택), name: detail, widget: string, required: false }
+                  - label: 점 목록 (선택)
+                    name: bullets
+                    widget: list
+                    required: false
+                    field: { label: 한 줄, name: line, widget: string }
+          - label: 도구 (회색 꼬리표)
+            name: tools
+            widget: list
+            field: { label: 도구, name: tool, widget: string }
+          - label: 방법론 (파란 꼬리표)
+            name: methods
+            widget: list
+            field: { label: 방법론, name: method, widget: string }
+
+      # ── Contact ────────────────────────────────────────────
+      - name: contact
+        label: Contact
+        file: content/contact.yml
+        fields:
+          - { label: 페이지 제목, name: title, widget: string }
+          - { label: 제목 아래 설명, name: lede, widget: text }
+          - label: 정보 상자
+            name: boxes
+            widget: list
+            label_singular: 상자
+            summary: "{{fields.label}}"
+            fields:
+              - { label: 라벨, name: label, widget: string }
+              - { label: 내용 (줄바꿈 가능), name: text, widget: text }
+
+      # ── Site settings ──────────────────────────────────────
+      - name: site
+        label: 사이트 설정
+        file: content/site.yml
+        fields:
+          - { label: 이름 (영문), name: name, widget: string }
+          - { label: 이름 (한글), name: korean_name, widget: string }
+          - { label: 이메일 (모든 페이지에 쓰임), name: email, widget: string }
+          - { label: "하단 'Last updated' 날짜", name: updated, widget: string, hint: "예: November 2026" }
