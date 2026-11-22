@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seongkwon Ham</title>
+<meta name="description" content="Seongkwon Ham, M.A. student in Economics at Yonsei University. Research on carbon pricing, energy, trade, and climate finance.">
+<meta property="og:title" content="Seongkwon Ham">
+<meta property="og:description" content="Economics, Yonsei University. Carbon pricing, energy, trade, and climate finance.">
+<meta property="og:type" content="website">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231E31A8'/%3E%3Ctext x='16' y='21.5' font-family='Arial,sans-serif' font-size='14' font-weight='700' fill='white' text-anchor='middle'%3ESH%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&display=swap">
+<style>
+/* ============================================================
+   TOKENS. Light is the base; dark redefines tokens only.
+   ============================================================ */
+:root{
+  --ground:#E8EAEC;
+  --surface:#F7F8F9;
+  --ink:#101318;
+  --ink-2:#4B5361;
+  --ink-3:#626A78;
+  --rule:#C7CCD3;
+  --rule-2:#DDE1E5;
+  --accent:#1E31A8;
+  --accent-2:#DDE2FA;
+  --accent-dim:#9AA4DC;
+  --band:rgba(30,49,168,.13);
+  --sel:#C9D1F7;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0D0F13; --surface:#15181D; --ink:#E6E9ED; --ink-2:#A3AAB5; --ink-3:#7E8794;
+    --rule:#272C34; --rule-2:#1D2128; --accent:#93A6FF; --accent-2:#1B2240; --accent-dim:#4A5580;
+    --band:rgba(147,166,255,.16); --sel:#2B3562;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0D0F13; --surface:#15181D; --ink:#E6E9ED; --ink-2:#A3AAB5; --ink-3:#7E8794;
+  --rule:#272C34; --rule-2:#1D2128; --accent:#93A6FF; --accent-2:#1B2240; --accent-dim:#4A5580;
+  --band:rgba(147,166,255,.16); --sel:#2B3562;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:72px}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font-family:'Newsreader','Iowan Old Style',Georgia,serif;
+  font-size:17px;line-height:1.6;font-optical-sizing:auto;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+::selection{background:var(--sel);color:var(--ink)}
+a{color:inherit}
+p{margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,5vw,56px)}
+
+/* three voices: display / prose / instrument */
+.d{font-family:'Archivo','Helvetica Neue',Arial,sans-serif}
+.m{
+  font-family:'IBM Plex Mono',ui-monospace,'Cascadia Mono',Consolas,monospace;
+  font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;
+  font-weight:500;font-variant-numeric:tabular-nums;
+}
+.note{
+  font-family:'IBM Plex Mono',ui-monospace,'Cascadia Mono',Consolas,monospace;
+  font-size:.72rem;line-height:1.55;letter-spacing:0;color:var(--ink-3);
+}
+
+.lnk{
+  text-decoration:none;color:var(--ink);
+  background-image:linear-gradient(var(--accent),var(--accent));
+  background-size:0% 1px;background-position:0 100%;background-repeat:no-repeat;
+  transition:background-size .32s cubic-bezier(.2,.7,.3,1),color .2s;padding-bottom:2px;
+}
+.lnk:hover{background-size:100% 1px;color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:1px}
+.skip{position:absolute;left:-9999px;top:0;z-index:99;background:var(--ink);color:var(--ground);padding:10px 16px}
+.skip:focus{left:8px;top:8px}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;border-bottom:1px solid transparent;transition:background-color .3s,border-color .3s}
+.nav.stuck{background:var(--ground);border-bottom-color:var(--rule)}
+.nav-in{max-width:1240px;margin:0 auto;padding:0 clamp(16px,5vw,56px);height:58px;display:flex;align-items:center;gap:clamp(14px,3vw,32px)}
+.mark{
+  display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;
+  border:1px solid var(--ink);font-family:'Archivo',sans-serif;font-size:.7rem;font-weight:600;
+  letter-spacing:.02em;flex:none;text-decoration:none;
+}
+.nav-links{display:flex;gap:clamp(14px,2.6vw,30px);margin-left:auto;align-items:center}
+.nav-links a{color:var(--ink-2);text-decoration:none;white-space:nowrap;transition:color .2s}
+.nav-links a:hover,.nav-links a.on{color:var(--ink)}
+.theme-btn{
+  background:none;border:1px solid var(--rule);color:var(--ink-2);cursor:pointer;
+  width:28px;height:28px;display:inline-grid;place-items:center;padding:0;flex:none;
+  transition:color .2s,border-color .2s;
+}
+.theme-btn:hover{color:var(--ink);border-color:var(--ink-3)}
+.theme-btn svg{width:14px;height:14px}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{padding:clamp(110px,16vh,176px) 0 clamp(56px,8vw,96px);border-bottom:1px solid var(--rule)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,330px);gap:clamp(28px,6vw,80px);align-items:end}
+.eyebrow{color:var(--ink-2);display:flex;flex-wrap:wrap;gap:6px 14px;margin-bottom:clamp(18px,3vw,30px)}
+.eyebrow .dot{color:var(--accent-dim)}
+h1{
+  margin:0;font-family:'Archivo','Helvetica Neue',Arial,sans-serif;
+  font-size:clamp(3.2rem,11vw,8.6rem);font-weight:600;font-stretch:112%;
+  line-height:.86;letter-spacing:-.035em;
+}
+h1 span{display:block}
+.hero-sub{margin-top:clamp(24px,3.4vw,36px);max-width:34ch;font-size:clamp(1.12rem,2.1vw,1.42rem);line-height:1.44;font-weight:300}
+.hero-sub em{font-style:italic;color:var(--accent)}
+.hero-meta{margin-top:clamp(26px,4vw,40px);display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center}
+.facts{margin:0;border-top:1px solid var(--rule)}
+.fact{display:grid;grid-template-columns:minmax(0,84px) minmax(0,1fr);gap:14px;padding:12px 0;border-bottom:1px solid var(--rule-2)}
+.fact dt{color:var(--ink-3);padding-top:.25em}
+.fact dd{margin:0;font-size:.96rem;line-height:1.45}
+.fact dd span{display:block;color:var(--ink-2)}
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+.sec{border-bottom:1px solid var(--rule);padding:clamp(64px,9vw,116px) 0}
+.sec:last-of-type{border-bottom:0}
+.sec-grid{display:grid;grid-template-columns:minmax(0,150px) minmax(0,1fr);gap:clamp(20px,4vw,48px)}
+.rail{color:var(--ink-3);position:sticky;top:84px;align-self:start}
+.rail b{color:var(--ink);font-weight:500;display:block}
+.rail-line{height:1px;background:var(--rule);margin:12px 0 0;max-width:52px}
+h2{
+  font-family:'Archivo','Helvetica Neue',Arial,sans-serif;
+  font-size:clamp(1.7rem,3.6vw,2.7rem);font-weight:500;font-stretch:104%;
+  letter-spacing:-.025em;line-height:1.02;margin:0 0 clamp(10px,2vw,18px);
+}
+.sec-intro{color:var(--ink-2);max-width:60ch;margin-bottom:clamp(8px,2vw,16px)}
+h3{
+  font-family:'Archivo','Helvetica Neue',Arial,sans-serif;
+  font-size:clamp(1.3rem,2.4vw,1.8rem);font-weight:500;letter-spacing:-.02em;line-height:1.12;margin:0;
+}
+.subtitle{display:block;font-family:'Newsreader',Georgia,serif;font-weight:300;font-style:italic;
+  font-size:clamp(1.02rem,1.6vw,1.18rem);letter-spacing:0;line-height:1.35;color:var(--ink-2);margin-top:8px}
+
+/* ---- papers ---- */
+.paper{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:clamp(24px,4vw,52px);
+  padding:clamp(34px,5vw,58px) 0;border-top:1px solid var(--rule);
+}
+.paper:first-of-type{border-top-color:var(--ink)}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
+.tag{display:inline-block;padding:3px 8px;border:1px solid var(--rule);color:var(--ink-2);line-height:1.5}
+.tag.hi{border-color:var(--accent);color:var(--accent);background:var(--accent-2)}
+.byline{margin-top:14px;color:var(--ink-2);font-size:1rem}
+.byline em{font-style:italic}
+details{margin-top:16px}
+summary{
+  cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:8px;color:var(--ink-2);
+  font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;font-weight:500;
+  transition:color .2s;
+}
+summary::-webkit-details-marker{display:none}
+summary:hover{color:var(--accent)}
+summary::before{content:"+";font-size:.9rem;line-height:1;width:9px;display:inline-block}
+details[open] summary::before{content:"\2013"}
+.abs{margin-top:12px;padding-left:14px;border-left:1px solid var(--rule);color:var(--ink-2);font-size:.98rem;line-height:1.62;max-width:64ch}
+.abs + .note{margin-top:10px;padding-left:15px}
+.filerow{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:20px;align-items:center;color:var(--ink-3)}
+
+/* ---- figures ---- */
+.pfig{margin:0;border:1px solid var(--rule);background:var(--surface);padding:clamp(12px,1.6vw,18px) clamp(12px,1.8vw,20px) 14px;align-self:start}
+.pfig-head{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;color:var(--ink-3);margin-bottom:10px}
+.pfig-head b{color:var(--ink);font-weight:500}
+.pfig canvas{width:100%;height:clamp(210px,24vw,262px);display:block}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:10px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.sw{width:18px;height:0;border-top:2px solid currentColor;display:inline-block}
+.sw.dash{border-top-style:dashed}
+.sw.box{height:9px;border:0;background:var(--band)}
+.pfig .note{margin-top:8px}
+
+/* ---- cv timeline ---- */
+.tl-group{margin-top:clamp(30px,4vw,46px)}
+.tl-group > .m{display:block;color:var(--ink-3);margin-bottom:12px}
+.tl{border-top:1px solid var(--rule)}
+.tl-row{display:grid;grid-template-columns:minmax(0,150px) minmax(0,1fr);gap:clamp(12px,2vw,26px);padding:14px 0;border-bottom:1px solid var(--rule-2)}
+.tl-yr{color:var(--ink-3);padding-top:.3em}
+.tl-what{font-family:'Archivo',sans-serif;font-size:1.02rem;font-weight:500;letter-spacing:-.01em;line-height:1.3}
+.tl-where{color:var(--ink-2);font-size:.97rem;margin-top:3px}
+.tl-where i{font-style:italic}
+.tl ul{margin:6px 0 0;padding-left:1.1em;color:var(--ink-2);font-size:.95rem}
+.tl li{margin:2px 0}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+
+/* ---- contact ---- */
+.mailto{
+  display:inline-block;font-family:'Archivo',sans-serif;font-size:clamp(1.35rem,4.4vw,2.9rem);font-weight:500;font-stretch:104%;
+  letter-spacing:-.03em;line-height:1.05;text-decoration:none;color:var(--ink);word-break:break-word;
+  background-image:linear-gradient(var(--accent),var(--accent));background-size:0% 2px;background-position:0 100%;background-repeat:no-repeat;
+  transition:background-size .4s cubic-bezier(.2,.7,.3,1),color .25s;
+}
+.mailto:hover{background-size:100% 2px;color:var(--accent)}
+.addr{margin-top:22px;color:var(--ink-2);max-width:44ch}
+
+footer{border-top:1px solid var(--rule);padding:26px 0 34px;color:var(--ink-3)}
+.foot-in{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between}
+
+/* ============================================================
+   MOTION
+   ============================================================ */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1)}
+.rv.in{opacity:1;transform:none}
+.hero .ld{opacity:0;transform:translateY(18px);animation:ld .9s cubic-bezier(.2,.7,.3,1) forwards}
+.hero .ld:nth-child(2){animation-delay:.08s}
+.hero .ld:nth-child(3){animation-delay:.18s}
+.hero .ld:nth-child(4){animation-delay:.28s}
+.hero .facts.ld{animation-delay:.38s}
+@keyframes ld{to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-delay:0s!important;transition-duration:.001ms!important}
+  .rv,.hero .ld{opacity:1;transform:none}
+}
+.no-js .rv{opacity:1;transform:none}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1000px){
+  .paper{grid-template-columns:minmax(0,1fr)}
+  .pfig canvas{height:clamp(210px,46vw,280px)}
+}
+@media (max-width:860px){
+  .hero-grid{grid-template-columns:minmax(0,1fr)}
+  .facts{max-width:460px}
+  .sec-grid{grid-template-columns:minmax(0,1fr);gap:14px}
+  .rail{position:static;display:flex;align-items:baseline;gap:12px}
+  .rail-line{display:none}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .tl-row{grid-template-columns:minmax(0,1fr);gap:4px}
+  .tl-yr{padding-top:0}
+  .fact{grid-template-columns:minmax(0,1fr);gap:2px}
+  .nav-links{gap:14px}
+}
+</style>
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<a class="skip m" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="mark" href="#top" aria-label="Top of page">SH</a>
+    <nav class="nav-links m" aria-label="Sections">
+      <a href="#research">Research</a>
+      <a href="#cv">CV</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch color theme">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 1.8a6.2 6.2 0 0 1 0 12.4z" fill="currentColor"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="m eyebrow ld">
+        <span>M.A. in Economics</span><span class="dot">/</span>
+        <span>Yonsei University</span><span class="dot">/</span>
+        <span>Seoul</span>
+      </p>
+      <h1 class="ld"><span>Seongkwon</span><span>Ham</span></h1>
+      <p class="hero-sub ld">
+        I study how the cost of carbon moves through <em>power markets</em>,
+        trade, and asset prices, and who ends up bearing it.
+      </p>
+      <div class="hero-meta m ld">
+        <a class="lnk" href="mailto:skham.econ@yonsei.ac.kr">skham.econ@yonsei.ac.kr</a>
+        <a class="lnk" href="#research">Research &darr;</a>
+        <a class="lnk" href="#cv">CV &darr;</a>
+      </div>
+    </div>
+    <dl class="facts ld">
+      <div class="fact"><dt class="m">Fields</dt><dd>Macroeconomics<span>Energy and Environmental Economics<br>Finance</span></dd></div>
+      <div class="fact"><dt class="m">Now</dt><dd>M.A. student and Teaching Assistant<span>School of Economics, Yonsei University</span></dd></div>
+      <div class="fact"><dt class="m">Also</dt><dd>Research Assistant<span>Korea Economic Research Institute</span></dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ═══════════════ RESEARCH ═══════════════ -->
+<section class="sec" id="research">
+  <div class="wrap sec-grid">
+    <div class="rail m"><b>Research</b><span>3 papers</span><div class="rail-line"></div></div>
+    <div>
+      <h2 class="rv">Working papers</h2>
+      <p class="sec-intro rv">Drafts are available on request.</p>
+
+      <!-- W1 -->
+      <article class="paper rv" id="carbon-costs">
+        <div>
+          <div class="tags m"><span class="tag hi">Working paper</span><span class="tag">Nov 2026</span></div>
+          <h3>Tracing Carbon Costs<span class="subtitle">Macroeconomic Impacts of Korean ETS Policy Through the Power Sector</span></h3>
+          <p class="byline">with Soojin Jo and Myungkyu Shim</p>
+          <details>
+            <summary>Abstract</summary>
+            <p class="abs">
+              Carbon prices in Korea do not reach the price of electricity yet, as most allowances are free and
+              the retail price is a policy decision. This paper traces the response of the economy to a 10 percent
+              increase in the cost of carbon-emitting generation under a full pass-through scenario. On average,
+              production falls and unemployment rises, but both responses are small. The response of production
+              depends on the spare capacity of nuclear generation. When nuclear utilization is high, production is
+              0.36 percentage points lower after 7 months. When it is low, generation shifts more toward carbon-free
+              sources and the response of production is insignificant. Across manufacturing industries, production
+              in the high electricity-intensity group is significantly lower than in the low group for ten months. The
+              results are similar with quarterly GDP and consumption, an alternative measure of nuclear capacity,
+              and other groupings of industries. The cost of carbon pricing will therefore depend on how much
+              nuclear capacity is spare, and it will fall first on electricity-intensive industries.
+            </p>
+            <p class="note">JEL E32, Q41, Q43, Q48, Q54</p>
+          </details>
+          <p class="filerow m">
+            <span>Draft on request</span>
+            <a class="lnk" href="mailto:skham.econ@yonsei.ac.kr?subject=Draft%20request%3A%20Tracing%20Carbon%20Costs">Request &#8599;</a>
+          </p>
+        </div>
+        <figure class="pfig">
+          <p class="pfig-head m"><b>Fig. 1</b><span>All-industry production</span><span>0&ndash;18 months</span></p>
+          <canvas id="f1" role="img" aria-label="Line chart. Cumulative response of all-industry production to a 10 percent higher cost of carbon-emitting generation, by nuclear utilization. With high utilization, production is about 0.36 percentage points lower after 7 months. With low utilization, the response is insignificant."></canvas>
+          <p class="legend m">
+            <span style="color:var(--accent)"><i class="sw"></i>High utilization</span>
+            <span style="color:var(--ink-2)"><i class="sw"></i>Median</span>
+            <span style="color:var(--ink-3)"><i class="sw dash"></i>Low utilization</span>
+          </p>
+          <p class="note">Cumulative change in pp after a 10% higher cost of carbon-emitting generation, at the first quartile, median, and third quartile of lagged nuclear utilization. Local projections, 2009M07&ndash;2025M12. &#9679; significant at 95%, &times; not significant.</p>
+        </figure>
+      </article>
+
+      <!-- W2 -->
+      <article class="paper rv" id="being-green">
+        <div>
+          <div class="tags m"><span class="tag hi">Working paper</span><span class="tag">Nov 2026</span></div>
+          <h3>Is &ldquo;Being Green&rdquo; Rewarded in the Market?<span class="subtitle">An Empirical Investigation of Decarbonization and Stock Returns</span></h3>
+          <p class="byline">with Soh Young In, Ki Young Park, and Ashby Monk</p>
+          <details>
+            <summary>Abstract</summary>
+            <p class="abs">
+              We ask whether carbon-efficient firms earn higher stock returns than carbon-inefficient firms in the
+              same industry, and what the difference reflects. A portfolio that buys the firms with the lowest scope 1
+              emission intensity in each sector and sells those with the highest earns an alpha of more than 0.4 percent
+              per month from July 2009 to December 2024. The CAPM and the Fama-French three, four and five-factor models
+              do not explain it. The alpha moves with earnings news. Carbon-efficient firms report higher standardized
+              unexpected earnings (SUE) than carbon-inefficient firms, and when this gap enters the factor models the
+              alpha falls by close to half. About four fifths of this fall comes from the nine trading days around
+              earnings announcements. The gap in SUE comes mainly from its denominator. The earnings of carbon-efficient
+              firms are less volatile, so the same change in EPS is larger news for them. Carbon efficiency is thus
+              rewarded in the market even among firms in the same industry, and a large part of the reward arrives with
+              news about earnings that rise more steadily. Why carbon efficiency goes with steady earnings remains open,
+              but it helps to identify firms with stable and growing earnings ahead of their announcements.
+            </p>
+            <p class="note">JEL G12, G14, M41, Q54</p>
+          </details>
+          <p class="filerow m">
+            <span>Draft on request</span>
+            <a class="lnk" href="mailto:skham.econ@yonsei.ac.kr?subject=Draft%20request%3A%20Is%20Being%20Green%20Rewarded%20in%20the%20Market%3F">Request &#8599;</a>
+          </p>
+        </div>
+        <figure class="pfig">
+          <p class="pfig-head m"><b>Fig. 2</b><span>Efficient minus inefficient</span><span>2009&ndash;2024</span></p>
+          <canvas id="f2" role="img" aria-label="Line chart. Cumulative return of the portfolio that is long carbon-efficient and short carbon-inefficient firms within each sector, July 2009 to December 2024. It reaches about 91 percent for all firms and about 104 percent for large firms."></canvas>
+          <p class="legend m">
+            <span style="color:var(--accent)"><i class="sw"></i>EMI1 &middot; all firms</span>
+            <span style="color:var(--ink-2)"><i class="sw dash"></i>EMI3 &middot; large firms</span>
+          </p>
+          <p class="note">Cumulative return (%) of the portfolio long the lowest and short the highest scope 1 emission intensity within each sector, monthly, 2009M07&ndash;2024M12.</p>
+        </figure>
+      </article>
+
+      <!-- W3 -->
+      <article class="paper rv" id="environmental-bias">
+        <div>
+          <div class="tags m"><span class="tag hi">Working paper</span><span class="tag">Nov 2026</span></div>
+          <h3>Does Removing the Environmental Bias Reduce Carbon?<span class="subtitle">Evidence from Korea&ndash;China Steel Trade</span></h3>
+          <p class="byline">with Jaerim Choi</p>
+          <details>
+            <summary>Abstract</summary>
+            <p class="abs">
+              In most countries tariffs are lower on dirty goods than on clean goods, and models suggest that
+              removing this environmental bias of trade policy would lower global emissions. However, a free trade
+              agreement can only cut tariffs. Korea&rsquo;s tariffs on most dirty upstream steel products were already
+              zero before the Korea&ndash;China Free Trade Agreement, so its cuts fall almost only on clean downstream
+              products. The agreement is thus a well-suited setting to study how the carbon embodied in trade
+              responds when downstream tariffs are cut. The tariff cuts reduce the environmental bias in the tariffs
+              of both countries as they are phased in. With a Poisson pseudo-maximum-likelihood regression on
+              monthly trade by product, we find that the carbon embodied in Korea&rsquo;s imports of the liberalized
+              products rises by 40 percent relative to products whose tariff did not change. The estimate for
+              exports is also positive but it is insignificant. The results hold in four robustness checks. On the
+              products that both countries liberalized, we find suggestive evidence that embodied carbon moved
+              on net into Korea, the cleaner producer of the two. These results imply that removing the bias by
+              cutting downstream tariffs can raise the carbon embodied in trade.
+            </p>
+            <p class="note">JEL F13, F14, F18, Q54, Q56</p>
+          </details>
+          <p class="filerow m">
+            <span>Draft on request</span>
+            <a class="lnk" href="mailto:skham.econ@yonsei.ac.kr?subject=Draft%20request%3A%20Does%20Removing%20the%20Environmental%20Bias%20Reduce%20Carbon%3F">Request &#8599;</a>
+          </p>
+        </div>
+        <figure class="pfig">
+          <p class="pfig-head m"><b>Fig. 3</b><span>Carbon embodied in Korea&rsquo;s imports</span><span>Monthly</span></p>
+          <canvas id="f3" role="img" aria-label="Event-study chart. Monthly estimates of carbon embodied in Korea's imports of liberalized steel products relative to control products, 2013 to 2024. Estimates are near zero before the agreement entered into force in December 2015 and rise afterwards."></canvas>
+          <p class="legend m">
+            <span style="color:var(--accent)"><i class="sw"></i>Estimate</span>
+            <span><i class="sw box"></i>95% CI</span>
+            <span style="color:var(--ink-3)"><i class="sw dash"></i>FTA in force</span>
+          </p>
+          <p class="note">PPML estimate for each month, in log points relative to products whose tariff did not change. Base month 2015M12. SE clustered by product.</p>
+        </figure>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CV ═══════════════ -->
+<section class="sec" id="cv">
+  <div class="wrap sec-grid">
+    <div class="rail m"><b>CV</b><span>Nov 2026</span><div class="rail-line"></div></div>
+    <div>
+      <h2 class="rv">Curriculum vitae</h2>
+
+      <div class="tl-group rv">
+        <span class="m">Education</span>
+        <div class="tl">
+          <div class="tl-row"><p class="tl-yr m">2024 &ndash; present</p><div><p class="tl-what">M.A. in Economics</p><p class="tl-where">Yonsei University, Seoul</p></div></div>
+          <div class="tl-row"><p class="tl-yr m">2019 &ndash; 2024</p><div><p class="tl-what">B.A. in Economics</p><p class="tl-where">Yonsei University, Seoul &middot; <i>High Honors</i>, second-highest graduation honor</p></div></div>
+          <div class="tl-row"><p class="tl-yr m">2019 &ndash; 2021</p><div><p class="tl-what">Military service</p><p class="tl-where">Republic of Korea Army (leave of absence)</p></div></div>
+        </div>
+      </div>
+
+      <div class="tl-group rv">
+        <span class="m">Research experience</span>
+        <div class="tl">
+          <div class="tl-row"><p class="tl-yr m">2026 &ndash; present</p><div><p class="tl-what">Research Assistant, Korea Economic Research Institute</p>
+            <ul><li>Supports the production of economic outlook publications</li><li>Plans policy seminars, including one held at the National Assembly</li></ul></div></div>
+          <div class="tl-row"><p class="tl-yr m">Jan &ndash; Jun 2026</p><div><p class="tl-what">Research Assistant to Prof. Ki Young Park and Prof. Soh Young In</p><p class="tl-where"><i>Is Being Green Rewarded in the Market?</i> (Yonsei University and KAIST)</p>
+            <ul><li>Joined the project as a coauthor in July 2026</li><li>Built the Trucost, CRSP/Compustat, and MSCI data and extended the sample</li><li>Replicated Aswani, Raghunandan, and Rajgopal (2024) and P&aacute;stor, Stambaugh, and Taylor (2022) to validate the data and code</li></ul></div></div>
+          <div class="tl-row"><p class="tl-yr m">May &ndash; Jun 2024</p><div><p class="tl-what">Research Assistant to Prof. Eunseong Ma, Yonsei University</p><p class="tl-where"><i>Inflation-Linked Debt and Macroeconomic Volatility in 21 OECD Countries</i> &middot; R.K. Cho Research Cluster</p></div></div>
+        </div>
+      </div>
+
+      <div class="tl-group rv">
+        <span class="m">Teaching assistant, Yonsei University</span>
+        <div class="tl">
+          <div class="tl-row"><p class="tl-yr m">Fall 2025 &ndash; present</p><div><p class="tl-what">Information and Game Theory</p><p class="tl-where">Prof. Youngse Kim</p></div></div>
+          <div class="tl-row"><p class="tl-yr m">Fall 2025</p><div><p class="tl-what">AI &amp; Financial Engineering</p><p class="tl-where">Prof. Joocheol Kim</p></div></div>
+          <div class="tl-row"><p class="tl-yr m">Spring 2025 &ndash; Spring 2026</p><div><p class="tl-what">Public Finance</p><p class="tl-where">Prof. Kyung-woo Lee &middot; three semesters</p></div></div>
+          <div class="tl-row"><p class="tl-yr m">Spring 2025</p><div><p class="tl-what">Quantitative Analysis for Macroeconomics</p><p class="tl-where">Prof. Sunbin Kim</p></div></div>
+          <div class="tl-row"><p class="tl-yr m">Fall 2023</p><div><p class="tl-what">Peer Tutor, Macroeconomics</p><p class="tl-where">Yonsei Eagles Tutoring Program</p></div></div>
+        </div>
+      </div>
+
+      <div class="tl-group rv">
+        <span class="m">Presentations</span>
+        <div class="tl">
+          <div class="tl-row"><p class="tl-yr m">2026</p><div><p class="tl-what">18th Joint Economics Symposium of Six Leading East Asian Universities</p><p class="tl-where">Seoul, Korea</p></div></div>
+          <div class="tl-row"><p class="tl-yr m">2025</p><div><p class="tl-what">BK21 Workshop on Climate Change, Economics, and Policy Response</p><p class="tl-where">Yonsei University</p></div></div>
+        </div>
+      </div>
+
+      <div class="tl-group rv">
+        <span class="m">Honors, grants, and scholarships</span>
+        <div class="tl">
+          <div class="tl-row"><p class="tl-yr m">2024 &ndash; 2026</p><div><p class="tl-what">Brain Korea 21 Program</p><p class="tl-where">National Research Foundation of Korea</p></div></div>
+          <div class="tl-row"><p class="tl-yr m">2024 &ndash; 2026</p><div><p class="tl-what">Integrated M.A. Program Scholarship</p><p class="tl-where">Yonsei University</p></div></div>
+          <div class="tl-row"><p class="tl-yr m">2024</p><div><p class="tl-what">Graduated with High Honors</p><p class="tl-where">Second-highest graduation honor, Yonsei University</p></div></div>
+          <div class="tl-row"><p class="tl-yr m">2019, 2023</p><div><p class="tl-what">Honors</p><p class="tl-where">Top 10 percent of the semester, Yonsei University</p></div></div>
+          <div class="tl-row"><p class="tl-yr m">2023 &ndash; 2024</p><div><p class="tl-what">Other scholarships</p><p class="tl-where">Academic Track Scholarship (2024) &middot; Lee Doo-won Scholarship (2023, 2024) &middot; Hyechun Scholarship (2023) &middot; Tutoring Scholarship (2023)</p></div></div>
+        </div>
+      </div>
+
+      <div class="tl-group rv">
+        <span class="m">Academic activities</span>
+        <div class="tl">
+          <div class="tl-row"><p class="tl-yr m">2024 &ndash; present</p><div><p class="tl-what">Reading groups, Yonsei University</p><p class="tl-where">Macro-Environment-International &middot; Applied Microeconomics</p></div></div>
+          <div class="tl-row"><p class="tl-yr m">2022 &ndash; 2025</p><div><p class="tl-what">Junior Scholars Club, Economics Chapter</p><p class="tl-where">Yonsei University &middot; President, 2023</p></div></div>
+        </div>
+      </div>
+
+      <div class="tl-group rv">
+        <span class="m">Tools and methods</span>
+        <div class="chips m">
+          <span class="tag">MATLAB</span><span class="tag">Python</span><span class="tag">Stata</span>
+          <span class="tag">R</span><span class="tag">Julia</span><span class="tag">LaTeX</span>
+          <span class="tag hi">Local projections</span><span class="tag hi">PPML</span><span class="tag hi">Event study</span>
+          <span class="tag hi">Factor models</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<section class="sec" id="contact">
+  <div class="wrap sec-grid rv">
+    <div class="rail m"><b>Contact</b><div class="rail-line"></div></div>
+    <div>
+      <h2 style="margin-bottom:22px">Get in touch</h2>
+      <a class="mailto" href="mailto:skham.econ@yonsei.ac.kr">skham.econ@yonsei.ac.kr</a>
+      <p class="addr">School of Economics, Yonsei University<br>50 Yonsei-ro, Seodaemun-gu, Seoul 03722, Republic of Korea</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-in m">
+    <span>&copy; <span id="yr">2026</span> Seongkwon Ham</span>
+    <span>Last updated November 2026</span>
+  </div>
+</footer>
+
+<script src="assets/figdata.js"></script>
+<script>
+(function(){
+  "use strict";
+  var root = document.documentElement;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* ---- theme toggle: remembers the choice when storage is available ---- */
+  try { var saved = localStorage.getItem('theme'); if (saved) root.setAttribute('data-theme', saved); } catch(e){}
+  document.getElementById('themeBtn').addEventListener('click', function(){
+    var dark = getComputedStyle(root).getPropertyValue('--ground').trim().toLowerCase() === '#0d0f13';
+    var next = dark ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch(e){}
+  });
+
+  /* ---- sticky nav ---- */
+  var nav = document.getElementById('nav');
+  var onScroll = function(){ nav.classList.toggle('stuck', window.scrollY > 40); };
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* ---- scroll reveal (with failsafe) ---- */
+  var rv = document.querySelectorAll('.rv');
+  var revealAll = function(){ rv.forEach(function(el){ el.classList.add('in'); }); };
+  if (reduce || !('IntersectionObserver' in window)) { revealAll(); }
+  else {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {rootMargin:'0px 0px -10% 0px', threshold:.04});
+    rv.forEach(function(el){ io.observe(el); });
+    setTimeout(revealAll, 3000);
+  }
+
+  /* ---- active nav link ---- */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
+  var secs = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  if ('IntersectionObserver' in window) {
+    var so = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (!e.isIntersecting) return;
+        links.forEach(function(a,i){ a.classList.toggle('on', secs[i] === e.target); }); });
+    }, {rootMargin:'-45% 0px -50% 0px'});
+    secs.forEach(function(s){ if (s) so.observe(s); });
+  }
+
+  /* ============================================================
+     FIGURES. Drawn from the numbers behind the paper figures
+     (assets/figdata.js), so they follow the light/dark tokens.
+     ============================================================ */
+  var F = window.FIGDATA; if (!F) return;
+  function tok(n){ return getComputedStyle(root).getPropertyValue(n).trim(); }
+  var MONO = '"IBM Plex Mono", ui-monospace, monospace';
+
+  function niceTicks(lo, hi, n){
+    var span = hi - lo, step = Math.pow(10, Math.floor(Math.log10(span / n)));
+    var err = span / n / step;
+    step *= err >= 7.5 ? 10 : err >= 3.5 ? 5 : err >= 1.5 ? 2 : 1;
+    var t = [], v = Math.ceil(lo / step) * step;
+    for (; v <= hi + 1e-9; v += step) t.push(Math.round(v / step) * step);
+    return {ticks:t, step:step};
+  }
+  function fmt(v, step){ var d = step < 1 ? Math.min(2, Math.ceil(-Math.log10(step))) : 0; return v.toFixed(d).replace('-', '−'); }
+
+  /* Frame: axes, gridlines, labels. Returns scale functions. */
+  function frame(c, spec){
+    var ctx = c.ctx, W = c.W, H = c.H;
+    var padL = 44, padR = 10, padT = 8, padB = 24;
+    var iw = W - padL - padR, ih = H - padT - padB;
+    var X = function(x){ return padL + (x - spec.x0) / (spec.x1 - spec.x0) * iw; };
+    var Y = function(y){ return padT + (1 - (y - spec.y0) / (spec.y1 - spec.y0)) * ih; };
+    ctx.clearRect(0, 0, W, H);
+    ctx.font = '500 9.5px ' + MONO; ctx.lineWidth = 1; ctx.textBaseline = 'middle';
+    spec.yt.ticks.forEach(function(v){
+      var y = Math.round(Y(v)) + .5;
+      ctx.strokeStyle = v === 0 ? tok('--ink-3') : tok('--rule-2');
+      ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(W - padR, y); ctx.stroke();
+      ctx.fillStyle = tok('--ink-3'); ctx.textAlign = 'right';
+      ctx.fillText(fmt(v, spec.yt.step), padL - 8, y);
+    });
+    ctx.textAlign = 'center'; ctx.fillStyle = tok('--ink-3');
+    var minGap = 34, last = -1e9;
+    spec.xt.forEach(function(t){
+      var x = X(t.v); if (x - last < minGap) return; last = x;
+      ctx.fillText(t.label, x, padT + ih + 14);
+      ctx.strokeStyle = tok('--rule'); ctx.beginPath();
+      ctx.moveTo(Math.round(x) + .5, padT + ih); ctx.lineTo(Math.round(x) + .5, padT + ih + 4); ctx.stroke();
+    });
+    ctx.strokeStyle = tok('--rule'); ctx.beginPath(); ctx.moveTo(padL, padT + ih + .5); ctx.lineTo(W - padR, padT + ih + .5); ctx.stroke();
+    return {X:X, Y:Y, padL:padL, padT:padT, iw:iw, ih:ih};
+  }
+  function clip(c, f, p){ c.ctx.save(); c.ctx.beginPath(); c.ctx.rect(0, 0, f.padL + f.iw * p + 6, c.H); c.ctx.clip(); }
+  function path(ctx, xs, ys, X, Y){ ctx.beginPath(); xs.forEach(function(x, i){ i ? ctx.lineTo(X(x), Y(ys[i])) : ctx.moveTo(X(x), Y(ys[i])); }); }
+  function range(arrs, pad){ var lo = Infinity, hi = -Infinity;
+    arrs.forEach(function(a){ a.forEach(function(v){ if (v < lo) lo = v; if (v > hi) hi = v; }); });
+    var p = (hi - lo) * (pad || .06); return [lo - p, hi + p]; }
+
+  /* Fig. 1: three lines, markers by significance */
+  function drawF1(c, p){
+    var S = F.w1, keys = ['Low utilization', 'Median', 'High utilization'];
+    var r = range(keys.map(function(k){ return S[k].b; }).concat([[0]]), .08);
+    var yt = niceTicks(r[0], r[1], 5);
+    var xt = []; for (var h = 0; h <= 18; h += 3) xt.push({v:h, label:String(h)});
+    var f = frame(c, {x0:-.4, x1:18.4, y0:r[0], y1:r[1], yt:yt, xt:xt});
+    var ctx = c.ctx; clip(c, f, p);
+    var sty = {'Low utilization':[tok('--ink-3'), [4,3], 1.3], 'Median':[tok('--ink-2'), [], 1.3], 'High utilization':[tok('--accent'), [], 2]};
+    keys.forEach(function(k){
+      var s = S[k], st = sty[k];
+      ctx.strokeStyle = st[0]; ctx.lineWidth = st[2]; ctx.setLineDash(st[1]);
+      path(ctx, s.h, s.b, f.X, f.Y); ctx.stroke(); ctx.setLineDash([]);
+      s.h.forEach(function(h, i){
+        var x = f.X(h), y = f.Y(s.b[i]);
+        ctx.fillStyle = st[0]; ctx.strokeStyle = st[0]; ctx.lineWidth = 1.2;
+        if (s.sig[i]) { ctx.beginPath(); ctx.arc(x, y, 2.7, 0, 6.283); ctx.fill(); }
+        else { ctx.beginPath(); ctx.moveTo(x-2.4, y-2.4); ctx.lineTo(x+2.4, y+2.4); ctx.moveTo(x+2.4, y-2.4); ctx.lineTo(x-2.4, y+2.4); ctx.stroke(); }
+      });
+    });
+    ctx.restore();
+    axisNote(c, f, 'months after the shock');
+  }
+
+  /* Fig. 2: cumulative EMI return */
+  function drawF2(c, p){
+    var S = F.w2, n = S.t.length, idx = S.t.map(function(_, i){ return i; });
+    var r = range([S.EMI1, S.EMI3, [0]], .06), yt = niceTicks(r[0], r[1], 5);
+    var xt = []; S.t.forEach(function(t, i){ var y = +t.slice(0,4); if (t.slice(5) === '01' && y % 2 === 0) xt.push({v:i, label:String(y)}); });
+    var f = frame(c, {x0:0, x1:n - 1, y0:r[0], y1:r[1], yt:yt, xt:xt});
+    var ctx = c.ctx; clip(c, f, p);
+    ctx.lineWidth = 1.3; ctx.strokeStyle = tok('--ink-2'); ctx.setLineDash([4,3]);
+    path(ctx, idx, S.EMI3, f.X, f.Y); ctx.stroke(); ctx.setLineDash([]);
+    ctx.lineWidth = 2; ctx.strokeStyle = tok('--accent');
+    path(ctx, idx, S.EMI1, f.X, f.Y); ctx.stroke();
+    ctx.restore();
+    axisNote(c, f, '%');
+  }
+
+  /* Fig. 3: event study with band; k = months from Jan 2016 */
+  function drawF3(c, p){
+    var S = F.w3;
+    var r = range([S.lo, S.hi, [0]], .04), yt = niceTicks(r[0], r[1], 5);
+    var xt = []; for (var y = 2013; y <= 2024; y++) xt.push({v:(y - 2016) * 12, label:String(y)});
+    var f = frame(c, {x0:S.k[0] - 1, x1:S.k[S.k.length - 1] + 1, y0:r[0], y1:r[1], yt:yt, xt:xt});
+    var ctx = c.ctx;
+    var xe = Math.round(f.X(-.5)) + .5;
+    ctx.strokeStyle = tok('--ink-3'); ctx.setLineDash([3,3]); ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(xe, f.padT); ctx.lineTo(xe, f.padT + f.ih); ctx.stroke(); ctx.setLineDash([]);
+    clip(c, f, p);
+    ctx.fillStyle = tok('--band'); ctx.beginPath();
+    S.k.forEach(function(k, i){ i ? ctx.lineTo(f.X(k), f.Y(S.hi[i])) : ctx.moveTo(f.X(k), f.Y(S.hi[i])); });
+    for (var i = S.k.length - 1; i >= 0; i--) ctx.lineTo(f.X(S.k[i]), f.Y(S.lo[i]));
+    ctx.closePath(); ctx.fill();
+    ctx.lineWidth = 1.6; ctx.strokeStyle = tok('--accent'); path(ctx, S.k, S.b, f.X, f.Y); ctx.stroke();
+    var bi = S.k.indexOf(-1);
+    if (bi >= 0) { ctx.strokeStyle = tok('--ink'); ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(f.X(-1), f.Y(0), 3.6, 0, 6.283); ctx.stroke(); }
+    ctx.restore();
+    axisNote(c, f, 'log points');
+  }
+
+  function axisNote(c, f, txt){
+    var ctx = c.ctx; ctx.font = '400 9px ' + MONO; ctx.fillStyle = tok('--ink-3');
+    ctx.textAlign = 'right'; ctx.textBaseline = 'top';
+    ctx.fillText(txt, f.padL + f.iw, f.padT + 2);
+  }
+
+  var charts = [['f1', drawF1], ['f2', drawF2], ['f3', drawF3]].map(function(d){
+    var el = document.getElementById(d[0]); if (!el || !el.getContext) return null;
+    return {el:el, ctx:el.getContext('2d'), draw:d[1], p: reduce ? 1 : 0, W:0, H:0, started:false};
+  }).filter(Boolean);
+
+  function layout(c){
+    var r = c.el.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    c.W = r.width; c.H = r.height;
+    c.el.width = Math.round(c.W * dpr); c.el.height = Math.round(c.H * dpr);
+    c.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function render(c){ if (c.W > 20 && c.H > 20) c.draw(c, c.p); }
+  function play(c){
+    if (c.started) return; c.started = true;
+    if (reduce) { c.p = 1; render(c); return; }
+    var t0 = null, dur = 1400;
+    (function step(ts){ if (t0 === null) t0 = ts;
+      var u = Math.min(1, (ts - t0) / dur); c.p = 1 - Math.pow(1 - u, 3); render(c);
+      if (u < 1) requestAnimationFrame(step); })(performance.now());
+  }
+  function all(){ charts.forEach(function(c){ layout(c); render(c); }); }
+
+  all();
+  if (!reduce && 'IntersectionObserver' in window) {
+    var co = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (!e.isIntersecting) return;
+        var c = charts.filter(function(x){ return x.el === e.target; })[0];
+        if (c) { setTimeout(function(){ layout(c); play(c); }, 250); co.unobserve(e.target); } });
+    }, {threshold:.35});
+    charts.forEach(function(c){ co.observe(c.el); });
+  } else { charts.forEach(function(c){ c.p = 1; c.started = true; render(c); }); }
+
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(all);
+  var rt; window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(all, 120); });
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', all);
+  new MutationObserver(all).observe(root, {attributes:true, attributeFilter:['data-theme']});
+  document.addEventListener('visibilitychange', function(){ if (document.visibilityState === 'visible') all(); });
+})();
+</script>
+</body>
+</html>
