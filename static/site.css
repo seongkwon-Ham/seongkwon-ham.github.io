@@ -97,7 +97,23 @@ p{margin:0}
    HOME HERO
    ============================================================ */
 .hero{padding:clamp(110px,16vh,176px) 0 clamp(56px,8vw,96px);border-bottom:1px solid var(--rule)}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,330px);gap:clamp(28px,6vw,80px);align-items:end}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,290px);gap:clamp(28px,6vw,80px);align-items:end}
+
+/* photo slot: static/photo.jpg, or an initials tile when there is none */
+.portrait{margin:0;aspect-ratio:4/5;width:100%;border:1px solid var(--rule);background:var(--surface);overflow:hidden;position:relative}
+.portrait img{width:100%;height:100%;object-fit:cover;display:block}
+.monogram{
+  position:absolute;inset:0;display:grid;place-items:center;
+  font-family:'Archivo','Helvetica Neue',Arial,sans-serif;font-size:clamp(3.4rem,7vw,5.2rem);font-weight:600;
+  font-stretch:112%;letter-spacing:-.04em;color:var(--accent);background:var(--accent-2);
+}
+
+/* home: greeting + facts */
+.about{padding:clamp(48px,7vw,88px) 0 0}
+.about-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:start}
+.greeting p{font-size:clamp(1.08rem,1.7vw,1.24rem);line-height:1.6;max-width:58ch;color:var(--ink-2)}
+.greeting p:first-child{color:var(--ink);font-size:clamp(1.2rem,2.1vw,1.5rem);line-height:1.42;font-weight:300}
+.greeting p + p{margin-top:1em}
 .eyebrow{color:var(--ink-2);display:flex;flex-wrap:wrap;gap:6px 14px;margin-bottom:clamp(18px,3vw,30px)}
 .eyebrow .dot{color:var(--accent-dim)}
 h1{
@@ -234,6 +250,8 @@ footer{border-top:1px solid var(--rule);padding:26px 0 34px;color:var(--ink-3)}
 }
 @media (max-width:860px){
   .hero-grid{grid-template-columns:minmax(0,1fr)}
+  .portrait{max-width:170px}
+  .about-grid{grid-template-columns:minmax(0,1fr)}
   .facts{max-width:460px}
   .contact-grid{grid-template-columns:minmax(0,1fr)}
 }
