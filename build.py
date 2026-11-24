@@ -360,6 +360,31 @@ def refresh_figures():
     print("figures: refreshed static/figdata.js")
 
 
+# ── Images: shrink phone photos and remove their metadata (camera, date, GPS location) ──
+IMAGE_TYPES = (".jpg", ".jpeg", ".png", ".webp")
+
+
+def clean_image(path, max_side=1600):
+    """Rewrites one image upright, at most max_side pixels long, with no metadata."""
+    from PIL import Image, ImageOps
+    with Image.open(path) as im:
+        im = ImageOps.exif_transpose(im)
+        im.thumbnail((max_side, max_side))
+        if path.suffix.lower() in (".jpg", ".jpeg"):
+            im.convert("RGB").save(path, "JPEG", quality=85, optimize=True)
+        else:
+            clean = Image.new(im.mode, im.size); clean.paste(im)
+            clean.save(path)
+
+
+def clean_images(folder):
+    for f in folder.rglob("*"):
+        if f.suffix.lower() in IMAGE_TYPES:
+            before = f.stat().st_size
+            clean_image(f)
+            print(f"image:   {f.relative_to(folder.parent).as_posix()}  {before // 1024} KB -> {f.stat().st_size // 1024} KB, metadata removed")
+
+
 # ── Build ───────────────────────────────────────────────────────────────
 SITE = {}
 
@@ -374,6 +399,7 @@ def build():
         shutil.rmtree(DOCS)
     DOCS.mkdir(parents=True)
     shutil.copytree(STATIC, DOCS / "assets")          # includes sub-folders made in the editor
+    clean_images(DOCS / "assets")                     # the published copies never carry GPS or camera data
     shutil.copytree(ADMIN, DOCS / "admin")
 
     PHOTO, photo_url = photo_html(home)
@@ -428,6 +454,8 @@ def build():
 
 
 if __name__ == "__main__":
+    if "--clean-photos" in sys.argv:      # rewrite the originals in static/ too (run once after an upload)
+        clean_images(STATIC)
     if "--figures" in sys.argv:
         refresh_figures()
     build()
