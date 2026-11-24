@@ -1,19 +1,17 @@
-# Home page. Editable at /admin > Home.
-# Text fields accept *italic*, **bold**, and [link text](https://...). A blank line starts a new paragraph.
 eyebrow:
   - M.A. in Economics
   - Yonsei University
   - Seoul
 tagline: I study the channels that generate *heterogeneous responses* to the same shock, especially in macroeconomics and finance. This interest has carried me into environmental and trade questions.
-photo: ""
-greeting: |
+photo: /assets/20260404_105204.jpg
+greeting: |-
   Thank you for visiting. I am an M.A. student in Economics at Yonsei University, with interests in macroeconomics and finance.
 
   I ask why the same shock produces different responses across industries, firms, and states of the economy, and through which channels. This question has taken me to carbon pricing and the power sector, to the stock returns of carbon-efficient firms, and to the carbon embodied in trade. Alongside my studies I work as a research assistant at the Korea Economic Research Institute and as a teaching assistant at Yonsei University.
 facts:
   - label: Fields
     title: Macroeconomics
-    detail: |
+    detail: |-
       Energy and Environmental Economics
       Finance
   - label: Now
