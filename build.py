@@ -82,8 +82,12 @@ FIGURES = {
 # ── Page bodies ─────────────────────────────────────────────────────────
 def photo_html(home):
     src = (home.get("photo") or "").strip()
-    if src and (STATIC / Path(src).name).exists():
-        return f'<img src="/assets/{Path(src).name}" alt="{html.escape(SITE["name"])}" width="600" height="750">', f"/assets/{Path(src).name}"
+    rel = re.sub(r"^/?(assets|static)/", "", src)          # editor saves /assets/<path under static/>
+    if rel and (STATIC / rel).is_file():
+        url = "/assets/" + quote(rel)
+        return f'<img src="{url}" alt="{html.escape(SITE["name"])}" width="600" height="750">', url
+    if src:
+        print(f"warning: photo '{src}' not found under static/, showing initials instead")
     for ext in ("jpg", "jpeg", "png", "webp"):
         if (STATIC / f"photo.{ext}").exists():
             return f'<img src="/assets/photo.{ext}" alt="{html.escape(SITE["name"])}" width="600" height="750">', f"/assets/photo.{ext}"
@@ -368,10 +372,8 @@ def build():
 
     if DOCS.exists():
         shutil.rmtree(DOCS)
-    (DOCS / "assets").mkdir(parents=True)
-    for f in STATIC.iterdir():
-        if f.is_file():
-            shutil.copy2(f, DOCS / "assets" / f.name)
+    DOCS.mkdir(parents=True)
+    shutil.copytree(STATIC, DOCS / "assets")          # includes sub-folders made in the editor
     shutil.copytree(ADMIN, DOCS / "admin")
 
     PHOTO, photo_url = photo_html(home)
