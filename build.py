@@ -8,7 +8,7 @@ On GitHub, every push (including every save in /admin) runs this script
 automatically (.github/workflows/site.yml) and publishes docs/.
 """
 import csv, html, json, re, shutil, sys
-from datetime import date
+from datetime import date, datetime, timezone
 from pathlib import Path
 from urllib.parse import quote
 
@@ -85,12 +85,12 @@ def photo_html(home):
     rel = re.sub(r"^/?(assets|static)/", "", src)          # editor saves /assets/<path under static/>
     if rel and (STATIC / rel).is_file():
         url = "/assets/" + quote(rel)
-        return f'<img src="{url}" alt="{html.escape(SITE["name"])}" width="600" height="750">', url
+        return f'<img src="{url}?v={BUILD_ID}" alt="{html.escape(SITE["name"])}" width="600" height="750">', url
     if src:
         print(f"warning: photo '{src}' not found under static/, showing initials instead")
     for ext in ("jpg", "jpeg", "png", "webp"):
         if (STATIC / f"photo.{ext}").exists():
-            return f'<img src="/assets/photo.{ext}" alt="{html.escape(SITE["name"])}" width="600" height="750">', f"/assets/photo.{ext}"
+            return f'<img src="/assets/photo.{ext}?v={BUILD_ID}" alt="{html.escape(SITE["name"])}" width="600" height="750">', f"/assets/photo.{ext}"
     return '<span class="monogram" aria-hidden="true">SH</span>', None
 
 
@@ -294,7 +294,9 @@ FRAME = """<!doctype html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&display=swap">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/site.css?v={build}">
+<script>/* Show the newest version: if the site was rebuilt after this copy was cached, reload once. */
+(function(){{var b="{build}";try{{fetch("/version.txt",{{cache:"no-store"}}).then(function(r){{return r.ok?r.text():b}}).then(function(v){{v=v.trim();if(v&&v!==b&&sessionStorage.getItem("reloaded")!==v){{sessionStorage.setItem("reloaded",v);location.reload();}}}}).catch(function(){{}});}}catch(e){{}}}})();</script>
 </head>
 <body>
 <a class="skip m" href="#main">Skip to content</a>
@@ -321,7 +323,7 @@ FRAME = """<!doctype html>
     <span>Last updated {updated}</span>
   </div>
 </footer>
-{scripts}<script src="/assets/site.js"></script>
+{scripts}<script src="/assets/site.js?v={build}"></script>
 </body>
 </html>
 """
@@ -387,6 +389,7 @@ def clean_images(folder):
 
 # ── Build ───────────────────────────────────────────────────────────────
 SITE = {}
+BUILD_ID = datetime.now(timezone.utc).strftime("%Y%m%d%H%M%S")   # changes on every build; busts browser caches
 
 
 def build():
@@ -435,7 +438,8 @@ def build():
                             extra_head=extra, nav=nav, content=content.replace("{PHOTO}", PHOTO),
                             year=date.today().year, korean_name=html.escape(SITE.get("korean_name", "")),
                             updated=inline(SITE.get("updated", "")),
-                            scripts="".join(f'<script src="{s}"></script>\n' for s in scripts))
+                            build=BUILD_ID,
+                            scripts="".join(f'<script src="{s}?v={BUILD_ID}"></script>\n' for s in scripts))
         out = DOCS / "index.html" if key == "home" else DOCS / key / "index.html"
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(page, encoding="utf-8", newline="\n")
@@ -448,6 +452,7 @@ def build():
     (DOCS / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: {SITE_URL}/sitemap.xml\n",
                                      encoding="utf-8", newline="\n")
     (DOCS / ".nojekyll").write_text("", encoding="utf-8")
+    (DOCS / "version.txt").write_text(BUILD_ID + "\n", encoding="utf-8")   # each page compares this with its own stamp
     print("search:  docs/sitemap.xml, docs/robots.txt")
     print("admin:   docs/admin/")
     print("photo:  ", photo_url or "none (initials tile shown)")
